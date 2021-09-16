@@ -142,13 +142,13 @@
   ```
   int num1;
   int num2;
-  int otherNum;
+  int other_num;
   //正确
 
-  int       otherNum1   = 3;
-  int       bigNum2     = 6;
-  char      myChar      = 'A';
-  string    helloWorld  = "hello world!";
+  int       other_num1   = 3;
+  int       big_num2     = 6;
+  char      my_char      = 'A';
+  string    hello_world  = "hello world!";
 
   //正确
   ```
