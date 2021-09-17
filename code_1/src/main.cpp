@@ -2,6 +2,7 @@
 #include<fstream>
 #include<sstream>
 #include<string>
+#include<ctype.h>
 
 using namespace std;
 
@@ -16,23 +17,26 @@ const string K_keyWord[32] = {
     "unsigned", "void", "volatile", "while"
 };
 
-typedef struct Input {
+struct Input {
     // 文件路径
     string  file_path;
     // 查询等级
     int     level;     
 };
 
-typedef struct CaseCount {
+struct CaseCount {
     int count;
     CaseCount *next;
 };
 
-typedef struct outputDate {
+struct OutputDate {
+    int         sum;
+    int         level;
     int         key_count[32];
-    int         if_else_flag;
     int         if_else_count;
     int         if_else_if_else_count;
+    bool        switch_flag;
+    int         else_if_flag;
     CaseCount   *case_head;
 };
 
@@ -40,18 +44,116 @@ typedef struct outputDate {
 class CilIo {
     public:
         Input   prompt();
-        void    output( int level ); 
+        void    output( OutputDate *output_date ); 
 };
+
+void CilIo :: output( OutputDate *o ) {
+    CaseCount *node = o->case_head;
+
+    cout << endl;
+    cout << "Total              num: " << o->sum << endl;
+    cout << "Switch             num: " << o->key_count[25] << endl;
+    cout << "Case               num:";
+    while( node->next != nullptr ){
+        cout << " " << node->count;
+        node = node->next;
+    }
+    cout << endl;
+    cout << "if                 num: " << o->key_count[15] << endl;
+    cout << "if-else            num: " << o->if_else_count << endl;
+    cout << "if-else_if-else    num: " << o->if_else_if_else_count << endl;
+}
 
 // 关键字提取器
 class KeyWordGetter {
     private: 
-        int key_count[32];
-        CaseCount *case_head;
-        int if_else_flag;
-        int if_else_count;
-        int if_else_if_else_count;
+        OutputDate  output_data;
+        void        keyCount( OutputDate *o, string w,
+                                              char *c );
+    public:
+        OutputDate *keyWord( string context, int l );
 };
+
+// 关键字计数，已完成
+void KeyWordGetter :: keyCount( OutputDate *o, string w,
+                                               char *c ){
+    CaseCount *node = o->case_head;
+
+    cout << w << ' ';
+    cout << o->switch_flag << ' ';
+    while( node->next != nullptr ) {
+         node = node->next;
+        cout << node->count << endl;
+    }
+    if( w == "switch" ) o->switch_flag = true;
+    if( w == "case" ) {
+        if( !o->switch_flag ){
+            node->count++;
+        } else {
+            node->next = new CaseCount{
+                count : 0,
+                next : nullptr
+            };
+            o->switch_flag = false;
+        }
+    }
+    if( w == "if" ) {
+        char *p = c - 3;
+        while( *p == ' ') {
+            p--;
+        }
+        if( *p == 'e' ) {
+            o->else_if_flag ++;
+        }
+    }
+    if( w == "else" ) {
+        if( o->else_if_flag == 1 ) {
+            o->if_else_if_else_count++;
+        } else if(o->else_if_flag == 0) {
+            o->if_else_count++;
+        }
+    }
+    for(int i = 0; i < 32; i++) {
+        if( K_keyWord[i] == w) {
+            o->key_count[i]++;
+            o->sum++;
+            cout << o->sum << " ";
+        }
+    }
+}
+
+// 单词提取，已完成
+OutputDate *KeyWordGetter :: keyWord( string c, int l ) {
+    int         index;
+    bool        flag;
+    OutputDate *out = new OutputDate{
+        sum : 0,
+        level : 0,
+        key_count : {0},
+        if_else_count : 0,
+        if_else_if_else_count :0,
+        switch_flag : false,
+        else_if_flag : 0,
+        case_head : new CaseCount {
+            count : 0,
+            next : nullptr
+        }
+    };
+    for( int i = 1; i < c.size(); i++ ) {
+        if( !isalpha( c[i] ) && isalpha( c[i-1] ) ) {
+            keyCount(
+                out, 
+                c.substr( index, i - index),
+                &(c[i])
+            );
+        }
+        if( !isalpha( c[i-1] ) && isalpha( c[i] ) ) { 
+            index = i;
+        }
+    }
+
+    return out;
+}
 
 // 用户输入，已完成。
 Input CilIo :: prompt() {
@@ -79,9 +181,13 @@ int main() {
     CilIo   cil_io;
     Input   input;
     string  context;
+    KeyWordGetter key_word;
+    OutputDate *output_date;
 
     input = cil_io.prompt();
     context = fileReader( input.file_path );
     cout << context;
+    output_date = key_word.keyWord( context, input.level);
+    cil_io.output( output_date );
     return 0;
 }
