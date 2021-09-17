@@ -10,3 +10,7 @@
 #### 任务分解
 - WBS
   ![WBS](https://github.com/fenriliuguang/031902217_psy/blob/master/out/code_1/code1_WBS/code1.png?raw=true)
+
+- PSP
+
+
