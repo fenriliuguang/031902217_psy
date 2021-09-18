@@ -5,7 +5,7 @@ int main(){
     long f;
     switch(i){
         case 0:
-            break;
+            break;  // switch;;
         case 1:
             break;
         case 2:
@@ -32,8 +32,11 @@ int main(){
         else {}
     }
     else{
-        if(j!=0){}
+        if(j!=0){}   /*   double
+
+                        */
         else{}
+        printf("if");    
     }
     return 0;
 }

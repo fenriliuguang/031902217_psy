@@ -80,10 +80,8 @@ void KeyWordGetter :: keyCount( OutputDate *o, string w,
     CaseCount *node = o->case_head;
 
     cout << w << ' ';
-    cout << o->switch_flag << ' ';
     while( node->next != nullptr ) {
          node = node->next;
-        cout << node->count << endl;
     }
     if( w == "switch" ) o->switch_flag = true;
     if( w == "case" ) {
@@ -120,12 +118,17 @@ void KeyWordGetter :: keyCount( OutputDate *o, string w,
             cout << o->sum << " ";
         }
     }
+    cout << endl;
 }
 
 // 单词提取，已完成
 OutputDate *KeyWordGetter :: keyWord( string c, int l ) {
     int         index;
     bool        flag;
+    bool        quo_flag = false;
+    bool        dou_slash_flag = false;
+    bool        slash_star_flag = false;
+
     OutputDate *out = new OutputDate{
         sum : 0,
         level : 0,
@@ -140,15 +143,29 @@ OutputDate *KeyWordGetter :: keyWord( string c, int l ) {
         }
     };
     for( int i = 1; i < c.size(); i++ ) {
+        if( c[i-1] == '"') {
+            quo_flag = !quo_flag;
+        }
+        if( c[i-1] == '/' && c[i] == '*') {
+            slash_star_flag = true;
+        }
+        if( c[i] == '/' && c[i-1] == '*') {
+            slash_star_flag = false;
+        }
+        if( c[i-1] == '/' && c[i] == '/') {
+            dou_slash_flag  = true;
+        }
+        if( c[i] == '\n' )dou_slash_flag = false;
+        if( !isalpha( c[i-1] ) && isalpha( c[i] ) ) { 
+            index = i;
+        }
+        if(dou_slash_flag||quo_flag||slash_star_flag)continue;
         if( !isalpha( c[i] ) && isalpha( c[i-1] ) ) {
             keyCount(
                 out, 
                 c.substr( index, i - index),
                 &(c[i])
             );
-        }
-        if( !isalpha( c[i-1] ) && isalpha( c[i] ) ) { 
-            index = i;
         }
     }
 
