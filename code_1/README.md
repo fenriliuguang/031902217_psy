@@ -41,6 +41,8 @@
 
 #### 工作迭代过程
 
+  ![迭代图](https://github.com/fenriliuguang/031902217_psy/blob/master/out/code_1/code1_active/active.png?raw=true)
+
 #### 代码风格约束
  - 参考自 [《谷歌C++开源项目风格指南》](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)，并生成了自己的代码约束，详见[ 个人代码规范 ](https://github.com/fenriliuguang/031902217_psy/blob/master/README.md) 。
 
@@ -160,14 +162,25 @@
 #### 代码分析
 
 - 单元测试。
-  > 现有的cpp单元测试框架要么过于繁琐（对于这个简单的程序），要么十分不成熟。考虑到本次任务代码量较少，采用手动测试的方式。
+  ![]()
 
-  我单独截取某个函数，放入自己构造的测试函数（程序）中，遍历静态的测试数据，和期望结果进行比对。除了函数 `ifElseCheck()` 命中率只有58%以外，其他函数均在100。
-
-  > 函数重载实现多种类型数据进入测试函数；测试数据以数组指针传参并在测试函数内标记修改，比对输出结果和样例结果，相同/总数 = 命中率。
+  > 很遗憾 vs 自带的代码覆盖率分析需要专业版才能使用，木得钱
 
 - 性能分析
 
   主要占用资源的是输入输出和文件读取。另外，头文件`<stack>` 的堆栈操作也是性能消耗的主要内容。
 
   ![性能分析](https://github.com/fenriliuguang/031902217_psy/blob/master/out/code_1/code1_WBS/test.png?raw=true)
+
+#### 困难及解决途径
+> 面向百度的程序设计
+
+- `c++` 在` Visual Studio ` 环境下和 `vscode`的gcc插件环境下，对代码检测报错不同，虽然都能编译成功，但是前者严格的代码规范还是让我吃了不少苦头。
+- c++的性能分析目前最好的是运行在vs上，花了不少时间来学习如何熟练运用它，但是仍然没有能够利用它完成代码单元测试，并运用到实际的编程与维护中去。
+- 大部分关于开发的内容是什么都不懂的，网上查阅资料＋看书才能勉强有些门路。
+
+#### 用到的工具
+
+  - vscode
+    - [PlantUML](https://plantuml.com/zh/)
+  - Visual Studio 2019
