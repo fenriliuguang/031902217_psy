@@ -18,7 +18,7 @@
 
     并利用面向对象的方式重构任务，使后续代码的维护更加简便高效。
 
-- PSP
+#### PSP
 
   |PSP Stages|估计时间/h|完成时间/h|
   |:--:|:--:|:--:|
@@ -38,6 +38,8 @@
   |计算工作量| 0.1 |0.1|
   |总结与提高|2|1|
   |总计|34.4|29.6|
+
+#### 工作迭代过程
 
 #### 代码风格约束
  - 参考自 [《谷歌C++开源项目风格指南》](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)，并生成了自己的代码约束，详见[ 个人代码规范 ](https://github.com/fenriliuguang/031902217_psy/blob/master/README.md) 。
@@ -168,4 +170,4 @@
 
   主要占用资源的是输入输出和文件读取。另外，头文件`<stack>` 的堆栈操作也是性能消耗的主要内容。
 
-  ![性能分析]()
+  ![性能分析](https://github.com/fenriliuguang/031902217_psy/blob/master/out/code_1/code1_WBS/test.png?raw=true)
