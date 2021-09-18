@@ -9,7 +9,7 @@
 
 #### 任务分解
 - WBS
-  ![WBS](https://github.com/fenriliuguang/031902217_psy/blob/master/out/code_1/code1_WBS/code1.png?raw=true)
+  ![WBS](https://img-blog.csdnimg.cn/20210919030427391.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA54Sa5pel5rWB5YWJ,size_15,color_FFFFFF,t_70,g_se,x_16)
 
   - 将代码任务分解为三个过程：
     1.用户的输入输出
@@ -41,7 +41,7 @@
 
 #### 工作迭代过程
 
-  ![迭代图](https://github.com/fenriliuguang/031902217_psy/blob/master/out/code_1/code1_active/active.png?raw=true)
+  ![迭代图](https://img-blog.csdnimg.cn/20210919030443332.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA54Sa5pel5rWB5YWJ,size_19,color_FFFFFF,t_70,g_se,x_16)
 
 #### 代码风格约束
  - 参考自 [《谷歌C++开源项目风格指南》](https://zh-google-styleguide.readthedocs.io/en/latest/google-cpp-styleguide/contents/)，并生成了自己的代码约束，详见[ 个人代码规范 ](https://github.com/fenriliuguang/031902217_psy/blob/master/README.md) 。
@@ -162,11 +162,11 @@
 #### 代码分析
 
 - 单元测试。
-  ![]()
-  > [测试用例1]() 的代码覆盖率结果
+  ![测试用例1](https://img-blog.csdnimg.cn/20210919030224652.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA54Sa5pel5rWB5YWJ,size_20,color_FFFFFF,t_70,g_se,x_16)
+  > [测试用例1](https://github.com/fenriliuguang/031902217_psy/blob/master/code_1/static/test1.c) 的代码覆盖率结果
 
-  ![]()
-  > [测试用例2]() 的代码覆盖率结果
+  ![测试用例2](https://img-blog.csdnimg.cn/20210919030211251.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA54Sa5pel5rWB5YWJ,size_20,color_FFFFFF,t_70,g_se,x_16)
+  > [测试用例2](https://github.com/fenriliuguang/031902217_psy/blob/master/code_1/static/test2.c) 的代码覆盖率结果
 
   可以看到，本代码当测试用例足够复杂，且查询等级为4的情况下，代码覆盖率能达到100%。
 
@@ -174,7 +174,7 @@
 
   主要占用资源的是输入输出和文件读取。另外，头文件`<stack>` 的堆栈操作也是性能消耗的主要内容。
 
-  ![性能分析](https://github.com/fenriliuguang/031902217_psy/blob/master/out/code_1/code1_WBS/test.png?raw=true)
+  ![性能分析](https://img-blog.csdnimg.cn/20210919030304514.png?x-oss-process=image/watermark,type_ZHJvaWRzYW5zZmFsbGJhY2s,shadow_50,text_Q1NETiBA54Sa5pel5rWB5YWJ,size_20,color_FFFFFF,t_70,g_se,x_16)
 
 #### 困难及解决途径
 > 面向百度的程序设计
