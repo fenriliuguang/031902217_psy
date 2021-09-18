@@ -2,6 +2,7 @@
     "files.associations": {
         "*.html": "html",
         "sstream": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "iostream": "cpp"
     }
 }
