@@ -3,6 +3,7 @@
 #include<sstream>
 #include<string>
 #include<ctype.h>
+#include<stack>
 
 using namespace std;
 
@@ -38,8 +39,8 @@ struct OutputDate {
     int         key_count[32];
     int         if_else_count;
     int         if_else_if_else_count;
-    bool        switch_flag;
-    int         else_if_flag;
+    bool        if_flag;
+    stack<int>  *if_else_stack;
     CaseCount   *case_head;
     CaseCount   *node;
 };
@@ -147,18 +148,34 @@ void KeyWordGetter :: ifElseCheck(
     OutputDate *o, string w, char *c) {
     if( w == "if" ) {
         char *p = c - 3;
-        while( *p == ' ') {
+        while( *p == ' ' || *p == '\n' ) {
             p--;
         }
         if( *p == 'e' ) {
-            o->else_if_flag ++;
+            o->if_else_stack->push(2);
+        }else {
+            o->if_else_stack->push(1);
         }
     }
     if( w == "else" ) {
-        if( o->else_if_flag == 1 ) {
-            o->if_else_if_else_count++;
-        } else if(o->else_if_flag == 0) {
-            o->if_else_count++;
+        char *p = c;
+        while( *p == ' ' || *p == '\n' ) {
+            p++;
+        }
+        if( !( *p == 'i' && *(p+1) == 'f') ) {
+            int i;
+            i = o->if_else_stack->top();
+            o->if_else_stack->pop();
+            switch (i)
+            {
+            case 1:
+                o->if_else_count++;
+                break;
+            case 2:
+                o->if_else_if_else_count++;
+            default:
+                break;
+            }
         }
     }
 }
@@ -191,7 +208,8 @@ OutputDate *KeyWordGetter :: keyWord(
         key_count : {0},
         if_else_count : 0,
         if_else_if_else_count :0,
-        else_if_flag : 0,
+        if_flag : false,
+        if_else_stack : new stack<int>,
         case_head : new CaseCount {
             count : 0,
             next : nullptr
@@ -244,6 +262,7 @@ string fileReader( string path ) {
     c_file.open( path , ios :: in);
     stringstream buffer;
     buffer << c_file.rdbuf();
+    c_file.close();
     return buffer.str();
 }
 
