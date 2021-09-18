@@ -247,10 +247,10 @@ Input CilIo :: prompt(){
 
 // 文件读取，返回c文件字符串，已完成
 string fileReader( string path ) {
-    fstream         c_file;
-    stringstream    buffer;
+    fstream c_file;
 
     c_file.open( path , ios :: in);
+    stringstream buffer;
     buffer << c_file.rdbuf();
     c_file.close();
     return buffer.str();

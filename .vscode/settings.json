@@ -3,6 +3,11 @@
         "*.html": "html",
         "sstream": "cpp",
         "ostream": "cpp",
-        "iostream": "cpp"
-    }
+        "iostream": "cpp",
+        "iosfwd": "cpp",
+        "xstring": "cpp"
+    },
+    "cSpell.words": [
+        "struct"
+    ]
 }
