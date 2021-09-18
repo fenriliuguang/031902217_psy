@@ -24,11 +24,14 @@ struct Input {
     int     level;     
 };
 
+// case链表
 struct CaseCount {
+    // 每个switch-case组，case的数量
     int count;
     CaseCount *next;
 };
 
+// 输出组
 struct OutputDate {
     int         sum;
     int         level;
@@ -41,6 +44,7 @@ struct OutputDate {
     CaseCount   *node;
 };
 
+// 符号判断标志
 struct Flags {
     bool        quo_flag = false;
     bool        dou_slash_flag = false;
@@ -54,6 +58,7 @@ class CilIo {
         void    output( OutputDate *output_date ); 
 };
 
+// 向用户输出
 void CilIo :: output( OutputDate *o ) {
     CaseCount *node = o->case_head;
 
